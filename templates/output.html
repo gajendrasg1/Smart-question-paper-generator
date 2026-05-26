@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generated Paper</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Generated Question Paper</h1>
+
+    <h3>Subject: {{ subject }}</h3>
+    <h3>Difficulty: {{ difficulty }}</h3>
+
+    <ol>
+        {% for q in questions %}
+            <li>{{ q }}</li>
+        {% endfor %}
+    </ol>
+
+    <form action="/download_pdf" method="POST">
+        <input type="hidden" name="subject" value="{{ subject }}">
+        <input type="hidden" name="difficulty" value="{{ difficulty }}">
+
+        {% for q in questions %}
+            <input type="hidden" name="questions" value="{{ q }}">
+        {% endfor %}
+
+        <button type="submit">Download PDF</button>
+    </form>
+
+</div>
+
+</body>
+</html>
